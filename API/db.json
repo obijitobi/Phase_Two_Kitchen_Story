@@ -1,0 +1,66 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "Product": [
+    {
+      "id": 123,
+      "pname": "Matar Palak Paneer",
+      "Ptype": "Veg",
+      "price": "240"
+    },
+    {
+      "id": 124,
+      "pname": "Tandoori Chicken",
+      "Ptype": "Non-Veg",
+      "price": 171
+    },
+    {
+      "id": 125,
+      "pname": "Samosa",
+      "Ptype": "Veg",
+      "price": 10
+    },
+    {
+      "id": 126,
+      "pname": "Chaat",
+      "Ptype": "Veg",
+      "price": 15
+    },
+    {
+      "id": 127,
+      "pname": "Dal Tadka",
+      "Ptype": "Veg",
+      "price": 175
+    },
+    {
+      "id": 128,
+      "pname": "Butter Chicken",
+      "Ptype": "Non-Veg",
+      "price": 100
+    },
+    {
+      "id": 129,
+      "pname": "Dhokla",
+      "Ptype": "Veg",
+      "price": 40
+    },
+    {
+      "id": "130",
+      "pname": "Chicken Biryani",
+      "Ptype": "Non-Veg",
+      "price": 200
+    },
+    {
+      "id": "131",
+      "pname": "Fish Fry",
+      "Ptype": "Non-Veg",
+      "price": "39",
+      "sendToSelf": false
+    }
+  ]
+}

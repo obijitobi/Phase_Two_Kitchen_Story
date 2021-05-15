@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSON Test</title>
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic" />
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" />
+    <!-- Milligram CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/admin.js"></script>
+      <!-- NavBar -->
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+            </button>
+            <a class="navbar-brand" href="#">Kitchen Story</a>
+          </div>
+          <div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li><a href="./products.html">Add New Product</a></li>
+                <li><a href="./updateproduct.html">Update existing product</a></li>
+                <li><a href="./deleteproduct.html">Delete product</a></li>
+                <li><a href="./password.html">Change Password</a></li>
+                <li><a href="./loginpage.html">Back to Login Page</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>  
+
+      <!-- Delete code -->
+
+      <div id="Delete">
+        
+        <div class="container">
+            <div class="row">
+                <div class="column">
+                    <h1>Delete Product based on ID</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <form>
+                        <fieldset>
+                            <label for="nameField">Product ID</label>
+                            <input name="id" type="text" placeholder="Please enter the product id" id="deleteid" />
+                        </fieldset>
+                    </form>
+                    <input class="button-primary" type="submit" value="Delete record" onclick=deleteproduct() />
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- -------------------------------------------------- -->
+    <script>
+        var id = document.getElementById("deleteid").value;
+        console.log(`Id is ${id}`)
+        const url = `http://localhost:8001/product/${id}`;
+        const formEl = document.querySelector("Form");
+            
+            
+            formEl.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const formData = new FormData(formEl);
+                const formDataSerialized = Object.fromEntries(formData);
+                // const jsonObject = {
+                //     ...formDataSerialized,
+                //     sendToSelf: formDataSerialized.sendToSelf ? true : false,
+                // };
+                try {
+                    const response = await fetch(url, {
+                        method: "DELETE",
+                        // body: JSON.stringify({
+                        //     id: id,
+                        //     pname: name,
+                        //     Ptype: type,
+                        //     price: price
+                        // }),
+                        headers: {
+                            "Content-Type": "application/json; charset=UTF-8",
+                        },
+                    });
+                    const json = await response.json();
+                    console.log(json);
+                } catch (e) {
+                    console.error(e);
+                    alert("there is an error");
+                }
+            });
+    
+           
+    
+        </script>
+        <!-- ------------------------------------------- -->
+        <div id="myData">
+            <h2>Product Details</h2>
+            <table class="table table-striped">
+                <tr  class="bg-info">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Rate</th>
+                    <th>Price</th>
+                </tr>
+            
+                <tbody id="myTable">
+                    
+                </tbody>
+            </table>
+        </div>
+        <script>
+            fetch('http://localhost:8001/Product')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    appendData(data);
+                })
+                .catch(function (err) {
+                    console.log('error: ' + err);
+                });
+            function appendData(data) {
+                var mainContainer = document.getElementById("myData");
+                var table = document.getElementById('myTable');
+                for (var i = 0; i < data.length; i++) {
+    
+                    var row = `<tr>
+                              <td>${data[i].id}</td>
+                              <td>${data[i].pname}</td>
+                              <td>${data[i].Ptype}</td>
+                              <td>Rs.${data[i].price}</td>
+                        </tr>`
+              table.innerHTML += row
+    
+                }
+            }
+            
+        </script>
+    <!-- ------------------------------------------------------ -->
+
+    </body>
+    </html>
